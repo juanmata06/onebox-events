@@ -1,1 +1,47 @@
-/* You can add global styles to this file, and also import other style files */
+/**
+  * ------------------------------------------------------------------------------------------------------------------------------
+  * General styles for HTML tags and root const vars:
+  * ------------------------------------------------------------------------------------------------------------------------------
+**/
+:root {
+  --primary-color: #9ecee9;
+  --accent-color: #3d8ab6;
+  --big-title-font-size: 18px;
+  --medium-title-font-size: 16px;
+  --small-title-font-size: 14px;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: var(--big-title-font-size);
+  font-weight: normal;
+}
+
+h2 {
+  font-size: var(--smallTitleFontSize);
+  font-weight: normal;
+}
+
+h3 {
+  font-size: var(--mediumFontSize);
+  font-weight: normal;
+}
+
+span,
+p {
+  font-size: var(--mediumFontSize);
+  font-weight: normal;
+}
