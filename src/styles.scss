@@ -52,13 +52,38 @@ span {
   font-weight: normal;
 }
 
+a {
+  text-decoration: unset;
+  color: var(--accent-color);
+}
+
 /**
   * ------------------------------------------------------------------------------------------------------------------------------
   * General styles for Bootstrap configs:
   * ------------------------------------------------------------------------------------------------------------------------------
 **/
-.card-img{
-  border-radius: unset;
+div.card {
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    > * {
+      margin: 0;
+      padding: 0;
+    }
+    h2,
+    h3 {
+      color: var(--accent-color);
+    }
+    h2 {
+      font-weight: 500;
+    }
+    p {
+      height: 100px;
+    }
+  }
 }
 
 /**

@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="col-12 mb-2 d-flex justify-content-end">
+    <a [routerLink]="'/'">
+      Volver
+    </a>
+  </div>
+  <div class="col-md-6">
+    <div class="card">
+      <div class="row p-3 gap-3">
+        @for (item of eventDetail.sessions; track $index) {
+          <div class="col-12 d-flex justify-content-between">
+            <span>
+              Fecha: {{item.date | date:'dd/MM/yyyy' }}, Disponibilidad: {{item.availability}}
+            </span>
+            <span class="d-flex gap-2 align-items-center">
+              <a (click)="null" class="plus-less-icon">-</a>
+              {{ 0 }}
+              <a (click)="null" class="plus-less-icon">+</a>
+            </span>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>

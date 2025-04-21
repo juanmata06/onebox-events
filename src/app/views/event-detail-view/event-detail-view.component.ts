@@ -1,24 +1,26 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { iEvent } from '../../logic/interfaces/iEvent';
 import { RouterModule } from '@angular/router';
+import { iEventDetail } from '../../logic/interfaces/iEventDetail';
+import { EventsService } from '../../logic/services/events.service';
 
 @Component({
-  selector: 'app-event-card',
+  selector: 'app-event-detail-view',
   standalone: true,
   imports: [CommonModule, RouterModule],
-  templateUrl: './event-card.component.html',
-  styleUrl: './event-card.component.scss'
+  templateUrl: './event-detail-view.component.html',
+  styleUrl: './event-detail-view.component.scss'
 })
-export class EventCardComponent {
+export class EventDetailViewComponent implements OnInit {
   /**
    * -----------------------------------------------------------------------------------------------------------------------------
    * General vars
    * -----------------------------------------------------------------------------------------------------------------------------
    */
+  private calculatorService = inject(EventsService);
   loading: boolean = true;
-  @Input() event: iEvent;
-  
+  eventDetail: iEventDetail;
+
   /**
    * -----------------------------------------------------------------------------------------------------------------------------
    * LYFECYCLE METHODS
@@ -26,11 +28,25 @@ export class EventCardComponent {
    */
   constructor() { }
 
+  ngOnInit(): void {
+    this.getEventsDetail();
+  }
+
   /**
    * -----------------------------------------------------------------------------------------------------------------------------
    * PRIVATE METHODS
    * -----------------------------------------------------------------------------------------------------------------------------
    */
+  public getEventsDetail(): void {
+    this.loading = true;
+    this.calculatorService.getEventsDetail().subscribe({
+      next: (response: iEventDetail) => {
+        this.eventDetail = response;
+        console.log(this.eventDetail);
+        
+      }
+    });
+  }
 
   /**
    * -----------------------------------------------------------------------------------------------------------------------------
@@ -50,6 +66,4 @@ export class EventCardComponent {
    * -----------------------------------------------------------------------------------------------------------------------------
    */
 }
-
-
 
