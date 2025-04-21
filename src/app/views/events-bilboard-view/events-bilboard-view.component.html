@@ -1,0 +1,8 @@
+<div class="row mx-3 mx-md-0">
+  @for (item of events; track item.id) {
+    <app-event-card 
+      [event]="item"
+      class="col-md-6"
+    />
+  }
+</div>

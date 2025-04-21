@@ -6,9 +6,11 @@
 :root {
   --primary-color: #9ecee9;
   --accent-color: #3d8ab6;
-  --big-title-font-size: 18px;
-  --medium-title-font-size: 16px;
-  --small-title-font-size: 14px;
+  --big-font-size: 18px;
+  --medium-font-size: 16px;
+  --small-font-size: 14px;
+  --very-small-font-size: 12px;
+  --very-very-small-font-size: 10px;
 }
 
 html,
@@ -26,22 +28,51 @@ body {
 }
 
 h1 {
-  font-size: var(--big-title-font-size);
+  font-size: var(--big-font-size);
   font-weight: normal;
 }
 
 h2 {
-  font-size: var(--smallTitleFontSize);
+  font-size: var(--medium-font-size);
   font-weight: normal;
 }
 
 h3 {
-  font-size: var(--mediumFontSize);
+  font-size: var(--small-font-size);
   font-weight: normal;
 }
 
-span,
 p {
-  font-size: var(--mediumFontSize);
+  font-size: var(--very-small-font-size);
   font-weight: normal;
+}
+
+span {
+  font-size: var(--very-very-small-font-size);
+  font-weight: normal;
+}
+
+/**
+  * ------------------------------------------------------------------------------------------------------------------------------
+  * General styles for Bootstrap configs:
+  * ------------------------------------------------------------------------------------------------------------------------------
+**/
+.card-img{
+  border-radius: unset;
+}
+
+/**
+  * ------------------------------------------------------------------------------------------------------------------------------
+  * My general styles:
+  * ------------------------------------------------------------------------------------------------------------------------------
+**/
+.page-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  > :nth-child(2) {
+    width: 100%;
+    max-width: 700px;
+  }
 }

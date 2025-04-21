@@ -1,0 +1,18 @@
+<div class="card">
+  <div class="card-body">
+    <h2 [innerHTML]="event.title" [routerLink]="'/event/' + event.id"></h2>
+    <h3 [innerHTML]="event.subtitle" [routerLink]="'/event/' + event.id"></h3>
+  </div>
+  <img [src]="event.image" [alt]="event.title" class="card-img" [routerLink]="'/event/' + event.id">
+  <div class="card-body">
+    <span>
+      {{ event.startDate | date:'dd/MM/yyyy' }}
+      -
+      {{ event.endDate | date:'dd/MM/yyyy' }}
+    </span>
+    <p class="d-none d-md-block" [innerHTML]="event.description"></p>
+  </div>
+  <button class="card-button" [routerLink]="'/event/' + event.id">
+    Comprar
+  </button>
+</div>
