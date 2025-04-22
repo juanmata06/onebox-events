@@ -1,0 +1,11 @@
+span {
+  font-size: var(--small-font-size);
+}
+
+a.trash-icon-container {
+  cursor: pointer;
+  img {
+    width: 15px;
+    height: 15px;
+  }
+}

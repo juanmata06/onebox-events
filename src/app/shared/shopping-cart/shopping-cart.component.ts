@@ -15,8 +15,8 @@ export class ShoppingCartComponent {
    * General vars
    * -----------------------------------------------------------------------------------------------------------------------------
    */
-  private cartService = inject(CartStoreService);
-  cart: Signal<iCartItem[]> = this.cartService.cart;
+  private _cartStore = inject(CartStoreService);
+  cart: Signal<iCartItem[]> = this._cartStore.cart;
 
   /**
    * -----------------------------------------------------------------------------------------------------------------------------
@@ -42,6 +42,9 @@ export class ShoppingCartComponent {
    * PUBLIC METHODS
    * -----------------------------------------------------------------------------------------------------------------------------
    */
+  public deleteDate(eventId: string, date: string): void {
+    this._cartStore.deleteDateQuantity(eventId, date);
+  }
 
   /**
    * -----------------------------------------------------------------------------------------------------------------------------

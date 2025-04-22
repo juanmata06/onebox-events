@@ -37,6 +37,8 @@ export class EventsStoreService {
 
     this.eventsService.getEventDetail(id).subscribe({
       next: (event) => {
+        event.sessions?.sort((a, b) => Number(a.date) - Number(b.date));
+
         const current = this.eventsDetailsSignal();
         this.eventsDetailsSignal.set([...current, event]);
       },
@@ -45,7 +47,6 @@ export class EventsStoreService {
       }
     });
   }
-
 
   public getEventDetail = (id: string): Signal<iEventDetail | null> => computed(
     () => this.eventsDetailsSignal().find(e => e.event.id === id) ?? null

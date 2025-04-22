@@ -34,6 +34,8 @@ export class CartStoreService {
         updatedItem.datesSelected[dateIndex].quantity++;
       }
 
+      updatedItem.datesSelected?.sort((a, b) => Number(a.date) - Number(b.date))
+
       const updatedItems: iCartItem[] = [...items];
       updatedItems[itemIndex] = updatedItem;
       return updatedItems;
@@ -56,12 +58,35 @@ export class CartStoreService {
         updatedItem.datesSelected.splice(dateIndex, 1);
       }
 
+      updatedItem.datesSelected?.sort((a, b) => Number(a.date) - Number(b.date))
+
       if (updatedItem.datesSelected.length === 0) {
         const updatedItems: iCartItem[] = [...items];
         updatedItems.splice(itemIndex, 1);
         return updatedItems;
       }
 
+      const updatedItems: iCartItem[] = [...items];
+      updatedItems[itemIndex] = updatedItem;
+      return updatedItems;
+    });
+  }
+
+  public deleteDateQuantity(eventId: string, date: string): void {
+    this._cart.update((items: iCartItem[]) => {
+      const itemIndex = items.findIndex((item: iCartItem) => item.event.id === eventId);
+      if (itemIndex === -1) { return items; }
+  
+      const updatedItem: iCartItem = { ...items[itemIndex] };
+      updatedItem.datesSelected = updatedItem.datesSelected.filter(selected => selected.date !== date);
+      updatedItem.datesSelected?.sort((a, b) => Number(a.date) - Number(b.date))
+
+      if (updatedItem.datesSelected.length === 0) {
+        const updatedItems: iCartItem[] = [...items];
+        updatedItems.splice(itemIndex, 1);
+        return updatedItems;
+      }
+  
       const updatedItems: iCartItem[] = [...items];
       updatedItems[itemIndex] = updatedItem;
       return updatedItems;
