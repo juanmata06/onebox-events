@@ -3,5 +3,10 @@ span{
 }
 
 a.plus-less-icon{
+  cursor: pointer;
   font-size: var(--medium-font-size);
+}
+
+.card .row{
+  min-height: 200px;
 }

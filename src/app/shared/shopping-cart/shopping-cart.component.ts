@@ -1,25 +1,22 @@
-import { Component, inject, OnInit, Signal } from '@angular/core';
-import { iEvent } from '../../logic/interfaces/iEvent';
-import { EventCardComponent } from '../../shared/event-card/event-card.component';
-import { EventsStoreService } from '../../logic/store/events.store.service';
-
+import { Component, inject, Signal } from '@angular/core';
+import { iCartItem } from '../../logic/interfaces/iCartItem';
+import { CartStoreService } from '../../logic/store/cart.store.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-events-bilboard-view',
-  standalone: true,
-  imports: [EventCardComponent],
-  templateUrl: './events-bilboard-view.component.html',
-  styleUrl: './events-bilboard-view.component.scss'
+  selector: 'app-shopping-cart',
+  imports: [CommonModule],
+  templateUrl: './shopping-cart.component.html',
+  styleUrl: './shopping-cart.component.scss'
 })
-export class EventsBilboardViewComponent implements OnInit {
+export class ShoppingCartComponent {
   /**
    * -----------------------------------------------------------------------------------------------------------------------------
    * General vars
    * -----------------------------------------------------------------------------------------------------------------------------
    */
-  private store = inject(EventsStoreService);
-  loading: boolean = true;
-  events: Signal<iEvent[] | null> = this.store.events;
+  private cartService = inject(CartStoreService);
+  cart: Signal<iCartItem[]> = this.cartService.cart;
 
   /**
    * -----------------------------------------------------------------------------------------------------------------------------
@@ -27,10 +24,6 @@ export class EventsBilboardViewComponent implements OnInit {
    * -----------------------------------------------------------------------------------------------------------------------------
    */
   constructor() { }
-
-  ngOnInit(): void {
-    this.store.loadEventsList();
-  }
 
   /**
    * -----------------------------------------------------------------------------------------------------------------------------
@@ -56,3 +49,4 @@ export class EventsBilboardViewComponent implements OnInit {
    * -----------------------------------------------------------------------------------------------------------------------------
    */
 }
+

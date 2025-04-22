@@ -19,8 +19,8 @@ export class EventsService {
     );
   }
 
-  public getEventsDetail(): Observable<iEventDetail> {
-    return this._http.get<iEventDetail>('assets/data/event-info-184.json').pipe(
+  public getEventDetail(id: string): Observable<iEventDetail> {
+    return this._http.get<iEventDetail>(`assets/data/event-info-${id}.json`).pipe(
       catchError(error => {
         return throwError(() => new Error('No json file found.'));
       })
