@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { EventsBilboardViewComponent } from './events-bilboard-view.component';
+import { provideHttpClient } from '@angular/common/http';
 
 describe('EventsBilboardViewComponent', () => {
   let component: EventsBilboardViewComponent;
@@ -8,9 +8,13 @@ describe('EventsBilboardViewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EventsBilboardViewComponent]
-    })
-    .compileComponents();
+      imports: [
+        EventsBilboardViewComponent,
+      ],
+      providers: [
+        provideHttpClient()
+      ]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(EventsBilboardViewComponent);
     component = fixture.componentInstance;

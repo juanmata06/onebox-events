@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { provideRouter } from '@angular/router';
+import { provideHttpClient } from '@angular/common/http';
 import { EventDetailViewComponent } from './event-detail-view.component';
 
 describe('EventDetailViewComponent', () => {
@@ -8,7 +9,13 @@ describe('EventDetailViewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EventDetailViewComponent]
+      imports: [
+        EventDetailViewComponent
+      ],
+      providers: [
+        provideHttpClient(),
+        provideRouter([])
+      ]
     })
     .compileComponents();
 

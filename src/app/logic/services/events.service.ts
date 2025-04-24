@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { inject, Injectable } from "@angular/core";
 import { catchError, Observable, throwError } from "rxjs";
 import { iEvent } from "../interfaces/iEvent";
 import { iEventDetail } from "../interfaces/iEventDetail";
@@ -8,8 +8,9 @@ import { iEventDetail } from "../interfaces/iEventDetail";
   providedIn: "root"
 })
 export class EventsService {
-
-  constructor(private _http: HttpClient) { }
+  private _http: HttpClient = inject(HttpClient);
+  
+  constructor() { }
 
   public getEventsList(): Observable<iEvent[]> {
     return this._http.get<iEvent[]>('assets/data/events.json').pipe(
