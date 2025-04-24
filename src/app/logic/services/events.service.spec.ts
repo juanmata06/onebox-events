@@ -1,36 +1,13 @@
 import { TestBed } from "@angular/core/testing";
-import { EventsService } from "./events.service";
 import { provideHttpClient } from "@angular/common/http";
 import { HttpTestingController, provideHttpClientTesting } from "@angular/common/http/testing";
 import { catchError } from "rxjs";
-
-const mockEventsList = [
-  {
-    "id": "184",
-    "title": "PABLO ALBORÁN",
-  }
-];
-
-const mockEventDetail = {
-  "event": {
-    "id": "68",
-    "title": "JOAN MANUEL SERRAT",
-  },
-  "sessions": [
-    {
-      "date": "1444255200000",
-      "availability": "2"
-    },
-    {
-      "date": "1443650400000",
-      "availability": "4"
-    },
-  ]
-};
+import { EventsService } from "./events.service";
+import * as mocks from "../testing-mocks/events-mocks";
 
 describe('EventsService', () => {
   let service: EventsService;
-  let httpMock: HttpTestingController;
+  let http: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -40,11 +17,11 @@ describe('EventsService', () => {
       ]
     });
     service = TestBed.inject(EventsService);
-    httpMock = TestBed.inject(HttpTestingController);
+    http = TestBed.inject(HttpTestingController);
   });
 
   afterEach(() => {
-    httpMock.verify();
+    http.verify();
   });
 
   it('should be created', () => {
@@ -53,12 +30,12 @@ describe('EventsService', () => {
 
   it('should get events list', () => {
     service.getEventsList().subscribe(events => {
-      expect(events).toEqual(mockEventsList);
+      expect(events).toEqual(mocks.eventsList);
     });
 
-    const req = httpMock.expectOne('assets/data/events.json');
+    const req = http.expectOne('assets/data/events.json');
     expect(req.request.method).toBe('GET');
-    req.flush(mockEventsList);
+    req.flush(mocks.eventsList);
   });
 
   it('should handle error in get events list', () => {
@@ -70,7 +47,7 @@ describe('EventsService', () => {
       }
     });
 
-    const req = httpMock.expectOne('assets/data/events.json');
+    const req = http.expectOne('assets/data/events.json');
     expect(req.request.method).toBe('GET');
 
     req.flush('Error', {
@@ -81,12 +58,12 @@ describe('EventsService', () => {
 
   it('should get event detail', () => {
     service.getEventDetail('68').subscribe((data) => {
-      expect(data).toEqual(mockEventDetail);
+      expect(data).toEqual(mocks.eventDetail);
     });
 
-    const req = httpMock.expectOne(`assets/data/event-info-68.json`);
+    const req = http.expectOne(`assets/data/event-info-68.json`);
     expect(req.request.method).toBe('GET');
-    req.flush(mockEventDetail);
+    req.flush(mocks.eventDetail);
   });
 
   it('should handle error in get event detail', () => {
@@ -98,7 +75,7 @@ describe('EventsService', () => {
         })
       ).subscribe();
 
-    const req = httpMock.expectOne('assets/data/event-info-null.json');
+    const req = http.expectOne('assets/data/event-info-null.json');
     expect(req.request.method).toBe('GET');
 
     req.flush('Error', {

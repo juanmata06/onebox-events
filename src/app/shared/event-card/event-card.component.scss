@@ -1,5 +1,12 @@
 div.card {
+  div.card-body{
+    h2, h3{
+      width: fit-content;
+      cursor: pointer;
+    }
+  }
   img.card-img {
+    cursor: pointer;
     border-radius: unset;
   }
 

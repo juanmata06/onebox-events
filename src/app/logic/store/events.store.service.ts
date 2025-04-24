@@ -9,8 +9,8 @@ import { EventsService } from "../services/events.service";
 })
 export class EventsStoreService {
   private eventsService = inject(EventsService);
-  private eventsListSignal = signal<iEvent[] | null>(null);
-  private eventsDetailsSignal = signal<iEventDetail[]>([]);
+  public eventsListSignal = signal<iEvent[] | null>(null);
+  public eventsDetailsSignal = signal<iEventDetail[]>([]);
   readonly events = computed(() => this.eventsListSignal());
   readonly eventsDetails = computed(() => this.eventsDetailsSignal());
 
@@ -20,11 +20,9 @@ export class EventsStoreService {
     if (this.eventsListSignal()) return;
 
     this.eventsService.getEventsList().subscribe({
-      next: (events) => {
-        const sortedEvents = [...events].sort((a, b) => {
-          return Number(a.endDate) - Number(b.endDate);
-        });
-        this.eventsListSignal.set(sortedEvents);
+      next: (events: iEvent[]) => {
+        events?.sort((a, b) => Number(a.endDate) - Number(b.endDate));
+        this.eventsListSignal.set(events);
       },
       error: (err) => {
         throw new Error('Error loading events: ' + JSON.stringify(err));
@@ -36,7 +34,7 @@ export class EventsStoreService {
     if (this.eventsDetailsSignal().some(e => e.event.id === id)) return;
 
     this.eventsService.getEventDetail(id).subscribe({
-      next: (event) => {
+      next: (event: iEventDetail) => {
         event.sessions?.sort((a, b) => Number(a.date) - Number(b.date));
 
         const current = this.eventsDetailsSignal();
